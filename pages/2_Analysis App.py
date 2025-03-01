@@ -32,6 +32,15 @@ if "map_center" not in st.session_state:
 if "map_zoom" not in st.session_state:
     st.session_state.map_zoom = default_zoom
 
+
+temp_df = df[df['bedRoom'] <= 4]
+
+fig3= px.box(temp_df, x='bedRoom', y='price', title='Bhk price range comparison')
+
+st.plotly_chart(fig3,use_container_width = True)
+
+
+
 st.header('Sector Price per sqft Geomap')
 # Sidebar controls
 with st.sidebar:
@@ -109,15 +118,6 @@ if seleced_sector =="overall":
 else:
     fig2 = px.pie(df[df['sector']==seleced_sector],names = 'bedRoom',title = 'Total Bill Amount by Day')
     st.plotly_chart(fig2,use_container_width = True)
-
-
-
-st.header('Side by side Bhk price comparison')
-temp_df = df[df['bedRoom'] <= 4]
-
-fig3= px.box(temp_df, x='bedRoom', y='price', title='BHK Price Range')
-
-st.plotly_chart(fig3,use_container_width = True)
 
 
 
